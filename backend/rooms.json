@@ -1,0 +1,21 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "price": 250,
+      "capacity": 1,
+      "reservations": [
+        {
+          "email": "ola91057@gmail.com",
+          "checkInDate": "2021-04-15",
+          "checkOutDate": "2021-04-17"
+        }
+      ]
+    },
+    { "id": 2, "price": 200, "capacity": 2 },
+    { "id": 3, "price": 150, "capacity": 3 },
+    { "id": 4, "price": 150, "capacity": 4 },
+    { "id": 5, "price": 450, "capacity": 2 },
+    { "id": 6, "price": 350, "capacity": 4 }
+  ]
+}
