@@ -1,9 +1,8 @@
 import './Home.css';
 
-
 const Home = () => (
   <div>
-    <div className='maldives-photo-div' ></div>
+    <div className='maldives-photo-div'></div>
     <div>
       Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium
       eligendi veritatis beatae officia dicta consectetur quia, quas distinctio
@@ -16,7 +15,6 @@ const Home = () => (
       dignissimos optio cum fuga ipsum vel ratione laboriosam. Officia accusamus
       consequuntur vel quaerat vitae rem delectus perferendis!
     </div>
-    
   </div>
 );
 

@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Navbar from './Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home/Home';
@@ -7,12 +7,14 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [installEvent, setInstallEvent] = useState<any>();
-  
+
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', event =>
       setInstallEvent(event)
     );
   }, []);
+
+ 
 
   return (
     <Router>
