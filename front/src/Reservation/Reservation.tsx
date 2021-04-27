@@ -80,7 +80,7 @@ const Reservation = () => {
       <div>
         {basicFilteredRoom.length > 0 ? (
           basicFilteredRoom.map((room: any) => (
-            <OfferCard key={room.id} room={room} />
+            <OfferCard key={room.id} room={room} availabilityButton={false}/>
           ))
         ) : (
           searchEngineActive && <>
@@ -90,7 +90,7 @@ const Reservation = () => {
               terminach
             </p>
             {roomsFilteredByCapacity.map((room: any) => (
-              <OfferCard key={room.id} room={room} />
+              <OfferCard key={room.id} room={room} availabilityButton={true}/>
             ))}
           </>
         )}
