@@ -1,22 +1,26 @@
-.nav-solid {
-  padding: 0 5%;
+.nav {
   display: flex;
   justify-content: center;
-  height: 70px;
-  position: sticky;
+  height: 80px;
+  position: fixed;
   top: 0px;
+  width: 100%;
   z-index: 2;
-  background-color: rgb(255, 255, 255);
+  transition: height 1s, background-color 1s;
+}
+
+.nav-solid {
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 5px rgb(170, 170, 170);
 }
 
 .nav-transparent {
-    background-color: red;
-    height: 70px;
-    position: sticky;
+  background-color: transparent;
+  height: 70px;
 }
 
 .nav-container {
+  padding: 0 2%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -33,13 +37,16 @@
 .nav-logo-text {
   margin: 5px;
   font-size: 20px;
+  font-weight: 600;
   text-decoration: none;
   color: black;
   cursor: pointer;
+  font-family: adobe-garamond-pro, serif;
 }
 
 .nav-logo-little {
-    font-size: 15px;
+  // font-size: 20px;
+  font-family: 'tangerine', sans-serif;
 }
 
 .nav-menu {
@@ -52,18 +59,27 @@ li {
   list-style: none;
 }
 
+.start-links {
+  display: flex;
+}
+
 .nav-link {
   text-decoration: none;
-  font-weight: 500;
+  font-family: adobe-garamond-pro, serif;
+  font-size: 15px;
+  color: rgb(39, 39, 39);
+  
+  margin: 0 10px;
 }
 
 .nav-link:visited {
-  color: black;
+  color: rgb(39, 39, 39);
 }
 
 .nav-link:hover,
 .nav-link:active {
-    color: grey;
+  border-bottom: 1px solid rgb(39, 39, 39);
+  border-top: 1px solid rgb(39, 39, 39);
 }
 
 .nav-icon {
@@ -77,20 +93,23 @@ li {
   }
 
   .nav-menu {
+    &.transparent {
+      top: 70px;
+    }
+    &.active {
+      background-color: rgb(255, 255, 255);
+      transition: all 0.5s ease;
+      z-index: 1;
+      left: 0px;
+    }
+    padding: 30px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     left: -100%;
     width: 100%;
-    top: 70px;
+    top: 80px;
     position: absolute;
-  }
-
-  .nav-menu.active {
-    background-color: rgb(255, 255, 255);
-    transition: all 0.5s ease;
-    z-index: 1;
-    left: 0px;
   }
 
   .nav-item {

@@ -6,22 +6,22 @@ import {
   faBars,
   faSpa,
 } from '@fortawesome/free-solid-svg-icons';
-import './Navbar.css';
+import './Navbar.scss';
 
-const Navbar = () => {
+const Navbar = ({isHeaderTransparent}:any) => {
   const [active, setActive] = useState(false);
   const handleClose = () => setActive(false);
   return (
-    <nav className='nav-solid'>
+    <nav className={`nav ${isHeaderTransparent ? 'nav-transparent' : 'nav-solid'}`}>
       <div className='nav-container'>
         <div className='nav-logo'>
           <FontAwesomeIcon className='fa-lg' icon={faSpa} />
-          <Link onClick={handleClose} className='nav-logo-text' to='/'>
+          <Link onClick={handleClose} className={`nav-logo-text ${isHeaderTransparent && 'transparent'}`} to='/'>
             <h5>RELAX RESORT</h5>
             <p className='nav-logo-little'>hotel&spa</p>
           </Link>
         </div>
-        <ul className={active ? 'nav-menu active' : 'nav-menu'}>
+        <ul className={`${active ? 'nav-menu active' : 'nav-menu'} ${isHeaderTransparent && 'transparent'}`}>
           <li className='nav-item'>
             <Link onClick={handleClose} className='nav-link' to='/about'>
               o nas

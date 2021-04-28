@@ -1,4 +1,6 @@
-const OfferCard = ({ room, availabilityButton }: any) => (
+import './OfferCard.scss'
+
+const OfferCard = ({ room, availabilityButton, setReservationFormActive }: any) => (
   <div className='card'>
     <img src='' />
     <div className='card-body'>
@@ -8,7 +10,7 @@ const OfferCard = ({ room, availabilityButton }: any) => (
         liczba osób: {room.capacity}
       </div>
       {availabilityButton && <button>sprawdź dostępność</button>}
-      <button>zarezerwuj</button>
+      <button onClick={() => setReservationFormActive(true)}>zarezerwuj</button>
     </div>
   </div>
 );

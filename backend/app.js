@@ -34,7 +34,7 @@ app.get('/api', (req, res) => {
   const filteredRooms =
     startDate && endDate ? roomsFilteredByDate : roomsFilteredByCapacity;
 
-console.log({ filteredRooms, roomsFilteredByCapacity })
+  console.log({ filteredRooms, roomsFilteredByCapacity });
 
   res.status(200).send({ filteredRooms, roomsFilteredByCapacity });
 });
