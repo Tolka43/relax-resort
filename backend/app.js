@@ -13,13 +13,20 @@ const options = { encoding: 'utf8' };
 
 const roomsJson = fs.readFileSync(path.resolve('./rooms.json'), options);
 
-const roomsData = JSON.parse(roomsJson).rooms;
+const roomsData = JSON.parse(roomsJson);
+
+const updateData = () => {
+  const stringifiedData = JSON.stringify(roomsData);
+  fs.writeFile('./rooms.json', stringifiedData, () => console.log('zapisano'));
+};
+
+app.use(express.json());
 
 app.get('/api', (req, res) => {
   const startDate = req.query.checkInDate;
   const endDate = req.query.checkOutDate;
   const visitorsNumber = req.query.visitorsNumber;
-  const roomsFilteredByCapacity = roomsData.filter(
+  const roomsFilteredByCapacity = roomsData.rooms.filter(
     room => room.capacity == visitorsNumber
   );
 
@@ -34,9 +41,23 @@ app.get('/api', (req, res) => {
   const filteredRooms =
     startDate && endDate ? roomsFilteredByDate : roomsFilteredByCapacity;
 
-  console.log({ filteredRooms, roomsFilteredByCapacity });
-
   res.status(200).send({ filteredRooms, roomsFilteredByCapacity });
+});
+
+app.post('/api', (req, res) => {
+  const startDate = req.body.checkInDate;
+  const endDate = req.body.checkOutDate;
+  const roomId = req.body.choosedRoomId;
+  const email = req.body.email;
+
+  const choosedRoom = roomsData.rooms.find(room => room.id === roomId);
+  choosedRoom.reservations.push({
+    checkInDate: startDate,
+    checkOutDate: endDate,
+    email,
+  });
+  updateData();
+  res.sendStatus(200);
 });
 
 app.listen(port, () => {

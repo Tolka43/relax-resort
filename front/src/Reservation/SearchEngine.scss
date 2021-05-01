@@ -13,19 +13,19 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 20px 30px;
 }
 
 .search-form {
   display: flex;
   justify-content: center;
-  padding: 20px 30px;
   background-color: transparent;
+  margin-bottom: 20px;
 }
 
 button {
     
   font-family: adobe-garamond-pro, serif;
-  margin: 10px;
   background-color: transparent;
   color: black;
   cursor: pointer;

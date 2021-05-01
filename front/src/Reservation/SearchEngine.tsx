@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import OfferCard from './OfferCard';
-import useRoomsData from '../hooks/useRoomsData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { RoomsDataContext } from './Reservation';
 import './SearchEngine.scss';
 
 const SearchEngine = ({
+  visitorsNumber,
+  setVisitorsNumber,
   setReservationFormActive,
   checkInDate,
   setCheckInDate,
@@ -14,14 +16,13 @@ const SearchEngine = ({
   setCheckOutDate,
 }: any) => {
   const [price, setPrice] = useState(350);
-  const [visitorsNumber, setVisitorsNumber] = useState(2);
 
   const {
     getRooms,
     basicFilteredRoom,
     roomsFilteredByCapacity,
     searchingActive,
-  } = useRoomsData();
+  } = useContext(RoomsDataContext);
 
   return (
     <>
@@ -31,11 +32,13 @@ const SearchEngine = ({
             <input
               onChange={event => setCheckInDate(event.target.value)}
               type='date'
+              min={new Date().toISOString().substr(0, 10)}
               defaultValue={checkInDate}
             />
             <input
               onChange={event => setCheckOutDate(event.target.value)}
               type='date'
+              min={new Date().toISOString().substr(0, 10)}
               defaultValue={checkOutDate}
             />
             {/* <div>
@@ -88,12 +91,13 @@ const SearchEngine = ({
           </div>
         ) : (
           searchingActive && (
-            <>
+            <div>
               <h2>Nie ma dostępnych pokoi w wybranym terminie</h2>
-              <p>
-                zobacz oferty pasujące do twoich wyszukiwań dostępne w innych
-                terminach
-              </p>
+              <p>Aby zarezerwować pokój w innym terminie: </p>
+              <ol>
+                <li>sprawdź dostępność odpowiadającego ci pokoju </li>
+                <li>wybierz w wyszukiwarce nowy, dostępny termin</li>
+              </ol>
 
               <div className='cards-div'>
                 {roomsFilteredByCapacity.map((room: any) => (
@@ -105,7 +109,7 @@ const SearchEngine = ({
                   />
                 ))}
               </div>
-            </>
+            </div>
           )
         )}
       </div>

@@ -1,14 +1,22 @@
 import { useState } from 'react';
 
+export interface Room {
+  id: number;
+  title: string;
+  price: number;
+  capacity: number;
+  reservations: [];
+}
+
 const useRoomsData = () => {
-  const [basicFilteredRoom, setBasicFilteredRooms] = useState([]);
-  const [roomsFilteredByCapacity, setRoomsFilteredByCapacity] = useState([]);
+  const [basicFilteredRoom, setBasicFilteredRooms] = useState<Room[]>([]);
+  const [roomsFilteredByCapacity, setRoomsFilteredByCapacity] = useState<Room[]>([]);
   const [searchingActive, setSearchingActive] = useState(false);
 
   const getRooms = (
     visitorsNumber: number,
-    checkInDate: any,
-    checkOutDate: any
+    checkInDate: string,
+    checkOutDate: string
   ) => {
     fetch(
       `http://localhost:4000/api?visitorsNumber=${visitorsNumber}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
