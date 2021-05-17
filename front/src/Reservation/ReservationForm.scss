@@ -11,12 +11,50 @@
     align-items: center;
 }
 
-.modal-content {
+.modal-body {
     min-width: 400px;
     min-height: 400px;
     background-color: rgb(240, 240, 240);
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    position: relative;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    padding: 20%;
+}
+
+.invalid-email {
+    font-size: 10px;
+    color: red;
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-family: adobe-garamond-pro, serif;
+    cursor: pointer;
+}
+
+.m-10 {
+    margin: 5px;
+}
+
+.numbers {
+    
+  font-family: adobe-garamond-pro, serif;
+}
+
+.checkbox-div {
+    display: flex;
+    align-items: center;
+}
+
+.check-label {
+    font-size: 10px;
 }

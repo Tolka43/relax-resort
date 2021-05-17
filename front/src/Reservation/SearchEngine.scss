@@ -1,10 +1,11 @@
+
 .flowers-background {
   background-image: url('../images/flowers4.jpg');
   min-height: 50vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(80%);
+  filter: brightness(70%);
 }
 
 .search-engine {
@@ -62,13 +63,10 @@ input:focus-visible {
   }
 }
 
-.user-icon {
-  color: rgb(82, 82, 82);
-}
-
 .cards-div {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
+    justify-content: center;
 }
 
 @media screen and (max-width: 820px) {

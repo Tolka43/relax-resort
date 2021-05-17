@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
+import { sendMail } from './mailer.js';
 
 const app = express();
 const port = 4000;
@@ -58,6 +59,23 @@ app.post('/api', (req, res) => {
   });
   updateData();
   res.sendStatus(200);
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(`./images/${req.url}`));
+})
+
+app.post('/api/mail', (req, res) => {
+  console.log(req.body)
+  const mail = req.body.email;
+  const name = req.body.name;
+  sendMail(mail, name)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
 });
 
 app.listen(port, () => {

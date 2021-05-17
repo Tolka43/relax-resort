@@ -4,5 +4,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  filter: brightness(70%);
+  filter: brightness(80%);
+}
+
+.welcome-content {
+  position: relative;
+  top: 110px;
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
 }

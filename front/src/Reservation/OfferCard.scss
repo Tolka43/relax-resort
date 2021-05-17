@@ -1,3 +1,14 @@
 .card {
     margin: 10px;
+    box-shadow: 0 0 3px rgb(190, 190, 190);
+}
+
+img {
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 10px;
 }

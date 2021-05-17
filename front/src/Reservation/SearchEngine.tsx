@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import OfferCard from './OfferCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,8 +15,6 @@ const SearchEngine = ({
   checkOutDate,
   setCheckOutDate,
 }: any) => {
-  const [price, setPrice] = useState(350);
-
   const {
     getRooms,
     basicFilteredRoom,
@@ -41,15 +39,6 @@ const SearchEngine = ({
               min={new Date().toISOString().substr(0, 10)}
               defaultValue={checkOutDate}
             />
-            {/* <div>
-          <label>{price}zł</label>
-          <input
-            type='range'
-            min='50'
-            max='250'
-            onChange={event => setPrice(Number(event.target.value))}
-          />
-        </div> */}
             <div>
               <input
                 defaultValue={2}
@@ -60,10 +49,7 @@ const SearchEngine = ({
                   setVisitorsNumber(Number(event.target.value))
                 }
               />
-              <FontAwesomeIcon
-                className='user-icon fa-lg'
-                icon={faUserFriends}
-              />
+              <FontAwesomeIcon className='icon fa-lg' icon={faUserFriends} />
             </div>
           </div>
           <button
@@ -79,15 +65,17 @@ const SearchEngine = ({
 
       <div>
         {basicFilteredRoom.length > 0 ? (
-          <div className='cards-div'>
-            {basicFilteredRoom.map((room: any) => (
-              <OfferCard
-                key={room.id}
-                room={room}
-                availabilityButton={false}
-                setReservationFormActive={setReservationFormActive}
-              />
-            ))}
+          <div className='center'>
+            <div className='cards-div'>
+              {basicFilteredRoom.map((room: any) => (
+                <OfferCard
+                  key={room.id}
+                  room={room}
+                  availabilityButton={false}
+                  setReservationFormActive={setReservationFormActive}
+                />
+              ))}
+            </div>
           </div>
         ) : (
           searchingActive && (
@@ -98,16 +86,17 @@ const SearchEngine = ({
                 <li>sprawdź dostępność odpowiadającego ci pokoju </li>
                 <li>wybierz w wyszukiwarce nowy, dostępny termin</li>
               </ol>
-
-              <div className='cards-div'>
-                {roomsFilteredByCapacity.map((room: any) => (
-                  <OfferCard
-                    key={room.id}
-                    room={room}
-                    availabilityButton={true}
-                    setReservationFormActive={setReservationFormActive}
-                  />
-                ))}
+              <div className='center'>
+                <div className='cards-div'>
+                  {roomsFilteredByCapacity.map((room: any) => (
+                    <OfferCard
+                      key={room.id}
+                      room={room}
+                      availabilityButton={true}
+                      setReservationFormActive={setReservationFormActive}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           )
