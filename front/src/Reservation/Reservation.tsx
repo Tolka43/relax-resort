@@ -2,7 +2,7 @@ import { createContext, useState } from 'react';
 import useRoomsData from '../hooks/useRoomsData';
 import ReservationForm from './ReservationForm';
 import SearchEngine from './SearchEngine';
-import SearchResults from './SearchResults';
+import moment from 'moment'
 import { Room } from '../hooks/useRoomsData';
 
 interface choosedRoom {
@@ -26,19 +26,26 @@ export const ChoosedRoomContext = createContext<choosedRoom>(defaultValue);
 export const RoomsDataContext = createContext<RoomsData>(undefined as any);
 
 const Reservation = () => {
-  const actualDate = new Date().toISOString().substr(0, 10);
-  const [checkInDate, setCheckInDate] = useState(actualDate);
-  const [checkOutDate, setCheckOutDate] = useState(actualDate);
+  function specificDayDate(specificDay){
+    const now = moment()
+    const specificDayDate = now.day(specificDay)
+    const specificDayDateAsString = specificDayDate.format('YYYY-MM-DD')
+    return specificDayDateAsString;
+  }
+  const [checkInDate, setCheckInDate] = useState(specificDayDate(5));
+  const [checkOutDate, setCheckOutDate] = useState(specificDayDate(7));
   const [reservationFormActive, setReservationFormActive] = useState(false);
   const [choosedRoomId, setChoosedRoomId] = useState<number | any>();
 
-  const [visitorsNumber, setVisitorsNumber] = useState(2);
+  const [visitorsNumber, setVisitorsNumber] = useState(1);
   const {
     getRooms,
     basicFilteredRoom,
     roomsFilteredByCapacity,
     searchingActive,
   } = useRoomsData();
+
+  
 
   return (
     <div>
@@ -59,7 +66,7 @@ const Reservation = () => {
             setReservationFormActive={setReservationFormActive}
             checkInDate={checkInDate}
             setCheckInDate={setCheckInDate}
-            checkOutDate={checkInDate}
+            checkOutDate={checkOutDate}
             setCheckOutDate={setCheckOutDate}
           />
           {reservationFormActive && (
@@ -77,5 +84,7 @@ const Reservation = () => {
     </div>
   );
 };
+
+
 
 export default Reservation;

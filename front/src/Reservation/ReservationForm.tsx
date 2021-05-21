@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react';
 import { ChoosedRoomContext, RoomsDataContext } from './Reservation';
 import './ReservationForm.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserFriends, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 interface ReservationFormProps {
   visitorsNumber: number;
@@ -53,11 +51,9 @@ const ReservationForm = ({
             </p>
           </div>
           <div className='m-10'>
-            <label htmlFor=''>
               <p>
                 liczba osób: <span className='numbers'>{visitorsNumber}</span>
               </p>
-            </label>
           </div>
 
           <p className='m-10'>

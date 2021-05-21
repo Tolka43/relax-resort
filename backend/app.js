@@ -73,7 +73,8 @@ app.post('/api/mail', (req, res) => {
     .then(() => {
       res.sendStatus(200);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
       res.sendStatus(500);
     });
 });
