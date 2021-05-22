@@ -3,30 +3,26 @@ import { ChoosedRoomContext } from './Reservation';
 import './RoomCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faCheck } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { useState } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
-
 import 'react-datepicker/dist/react-datepicker.css';
-
-import 'react-datepicker/dist/react-datepicker.css';
+import {ReservationDataContext} from './Reservation'
 
 const RoomCard = ({
   room,
   availabilityButton,
-  setReservationFormActive,
-  checkInDate,
-  checkOutDate,
-  setCheckInDate,
-  setCheckOutDate,
+  setReservationFormActive
 }: any) => {
+  const {checkOutDate,
+    setCheckInDate,
+    setCheckOutDate} = useContext(ReservationDataContext)
   const { setChoosedRoomId } = useContext(ChoosedRoomContext);
   const [startDate, setStartDate] = useState<any>();
   const [show, setShow] = useState(false);
   const [endDate, setEndDate] = useState(null);
   const [disabledDates, setDisabledDates] = useState<Date[]>([]);
+
   const onChange = dates => {
     const [start, end] = dates;
     const lastDate = end === null ? checkOutDate : moment(end).format('YYYY-MM-DD')
@@ -67,7 +63,7 @@ const RoomCard = ({
           <p>cena/noc: {room.price}zł</p>
         </div>
         {availabilityButton && (
-          <>
+          <div >
             <button
               onClick={() => {
                 setShow(!show);
@@ -79,6 +75,7 @@ const RoomCard = ({
             {show && (
               <DatePicker
                 selected={startDate}
+                className='availability-picker'
                 onChange={onChange}
                 startDate={startDate}
                 endDate={endDate}
@@ -88,7 +85,7 @@ const RoomCard = ({
                 inline
               ><div className='small-info'>wybierz przedział dat</div></DatePicker>
             )}
-          </>
+          </div>
         )}
         {!availabilityButton && (
           <button
@@ -100,8 +97,6 @@ const RoomCard = ({
             zarezerwuj
           </button>
         )}
-
-        {/* <DatePicker selected={startDate} onChange={(date:any) => setStartDate(date)} /> */}
       </div>
     </div>
   );

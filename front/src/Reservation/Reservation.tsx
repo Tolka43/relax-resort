@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
 import useRoomsData from '../hooks/useRoomsData';
 import ReservationForm from './ReservationForm';
-import SearchEngine from './SearchEngine';
-import moment from 'moment'
+import ReservationSystem from './ReservationSystem';
+import moment from 'moment';
 import { Room } from '../hooks/useRoomsData';
 
 interface choosedRoom {
@@ -10,7 +10,7 @@ interface choosedRoom {
   setChoosedRoomId: (value: number) => void;
 }
 
-const defaultValue: choosedRoom = {
+const defaultChoosedRoom: choosedRoom = {
   choosedRoomId: 0,
   setChoosedRoomId: () => {},
 };
@@ -22,14 +22,36 @@ interface RoomsData {
   searchingActive: boolean;
 }
 
-export const ChoosedRoomContext = createContext<choosedRoom>(defaultValue);
+interface ReservationData {
+  checkInDate: string;
+  checkOutDate: string;
+  setCheckInDate: (value: string) => void;
+  setCheckOutDate: (value: string) => void;
+  visitorsNumber: number;
+  setVisitorsNumber: (value: number) => void;
+}
+
+const defaultReservationData: ReservationData = {
+  checkInDate: '',
+  checkOutDate: '',
+  setCheckInDate: () => {},
+  setCheckOutDate: () => {},
+  visitorsNumber: 1,
+  setVisitorsNumber: () => {},
+};
+
+export const ChoosedRoomContext =
+  createContext<choosedRoom>(defaultChoosedRoom);
 export const RoomsDataContext = createContext<RoomsData>(undefined as any);
+export const ReservationDataContext = createContext<ReservationData>(
+  defaultReservationData
+);
 
 const Reservation = () => {
-  function specificDayDate(specificDay){
-    const now = moment()
-    const specificDayDate = now.day(specificDay)
-    const specificDayDateAsString = specificDayDate.format('YYYY-MM-DD')
+  function specificDayDate(specificDay) {
+    const now = moment();
+    const specificDayDate = now.day(specificDay);
+    const specificDayDateAsString = specificDayDate.format('YYYY-MM-DD');
     return specificDayDateAsString;
   }
   const [checkInDate, setCheckInDate] = useState(specificDayDate(5));
@@ -45,46 +67,50 @@ const Reservation = () => {
     searchingActive,
   } = useRoomsData();
 
-  
-
   return (
     <div>
-      <RoomsDataContext.Provider
+      <ReservationDataContext.Provider
         value={{
-          getRooms,
-          basicFilteredRoom,
-          roomsFilteredByCapacity,
-          searchingActive,
+          checkInDate,
+          checkOutDate,
+          setCheckInDate,
+          setCheckOutDate,
+          visitorsNumber,
+          setVisitorsNumber,
         }}
       >
-        <ChoosedRoomContext.Provider
-          value={{ choosedRoomId, setChoosedRoomId }}
+        <RoomsDataContext.Provider
+          value={{
+            getRooms,
+            basicFilteredRoom,
+            roomsFilteredByCapacity,
+            searchingActive,
+          }}
         >
-          <SearchEngine
-            visitorsNumber={visitorsNumber}
-            setVisitorsNumber={setVisitorsNumber}
-            setReservationFormActive={setReservationFormActive}
-            checkInDate={checkInDate}
-            setCheckInDate={setCheckInDate}
-            checkOutDate={checkOutDate}
-            setCheckOutDate={setCheckOutDate}
-          />
-          {reservationFormActive && (
-            <ReservationForm
-            visitorsNumber={visitorsNumber}
-              checkInDate={checkInDate}
-              setCheckInDate={setCheckInDate}
-              checkOutDate={checkOutDate}
-              setCheckOutDate={setCheckOutDate}
+          <ChoosedRoomContext.Provider
+            value={{ choosedRoomId, setChoosedRoomId }}
+          >
+            <ReservationSystem
               setReservationFormActive={setReservationFormActive}
+              checkInDate={checkInDate}
+              checkOutDate={checkOutDate}
+              visitorsNumber={visitorsNumber}
             />
-          )}
-        </ChoosedRoomContext.Provider>
-      </RoomsDataContext.Provider>
+            {reservationFormActive && (
+              <ReservationForm
+                visitorsNumber={visitorsNumber}
+                checkInDate={checkInDate}
+                setCheckInDate={setCheckInDate}
+                checkOutDate={checkOutDate}
+                setCheckOutDate={setCheckOutDate}
+                setReservationFormActive={setReservationFormActive}
+              />
+            )}
+          </ChoosedRoomContext.Provider>
+        </RoomsDataContext.Provider>
+      </ReservationDataContext.Provider>
     </div>
   );
 };
-
-
 
 export default Reservation;

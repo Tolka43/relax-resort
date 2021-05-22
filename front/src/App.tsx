@@ -31,7 +31,7 @@ function App() {
           </Route>
           <Route path='/'>
             <Home />
-            <button onClick={() => installEvent.prompt()}>download</button>
+            {/* <button onClick={() => installEvent.prompt()}>download</button> */}
           </Route>
         </Switch>
       </div>

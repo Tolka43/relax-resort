@@ -1,5 +1,7 @@
 .flowers-background {
   background-image: url('../images/flowers4.jpg');
+  // background-color: #c7c2c1;
+
   min-height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -47,7 +49,6 @@ h2 {
 
 .date-group > input,
 .number-input {
-  
   padding: 8px;
   font-size: 15px;
 
@@ -57,7 +58,7 @@ h2 {
   &:hover,
   &:focus-visible {
     padding-bottom: 6px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid grey;
   }
 }
 
@@ -73,6 +74,7 @@ h2 {
   flex-wrap: wrap;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.76);
+  // background-color: #bfb7b479;
   padding: 20px;
 }
 
@@ -111,19 +113,30 @@ h2 {
         background-color: rgb(155, 155, 155);
       }
     }
+    &disabled.availability-picker {
+      background: repeating-linear-gradient(
+        45deg,
+        white,
+        white 4px,
+        rgb(235, 235, 235) 4px,
+        rgb(235, 235, 235) 6px
+      );
+      color: grey;
+    }
     &selected,
     &selected:hover,
     &in-range,
     &in-range:hover {
       background-color: rgb(151, 151, 151);
     }
-    
-    &keyboard-selected{
+
+    &keyboard-selected {
       background-color: white;
       color: black;
+      &:hover {
+        background-color: #f0f0f0;
+      }
     }
-
-
   }
 }
 
@@ -137,8 +150,6 @@ h2 {
     align-items: flex-start;
   }
 }
-
-
 
 input {
   font-family: 'Cormorant Garamond', serif;
