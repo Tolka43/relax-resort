@@ -49,7 +49,7 @@ const RoomCard = ({
 
   return (
     <div className='card'>
-      <img src={`http://localhost:4000${room.image}`} alt='' />
+      <img src={`http://localhost:4000/api${room.image}`} alt='' />
       <div className='card-body'>
         <h5 className='card-title'>{room.title}</h5>
         <div className='card-text'>
