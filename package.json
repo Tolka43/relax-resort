@@ -1,0 +1,21 @@
+{
+  "name": "holiday",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "cd front && npm i && cd ../backend && npm i && cd ..",
+    "build": "npm run build --prefix backend && npm run build --prefix front",
+    "start": "node build/main.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tolka43/relax-resort.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tolka43/relax-resort/issues"
+  },
+  "homepage": "https://github.com/Tolka43/relax-resort#readme"
+}

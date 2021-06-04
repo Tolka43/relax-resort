@@ -1,29 +1,36 @@
-import express from 'express';
+import express, { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import { sendMail } from './mailer.js';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-const port = 4000;
 
-app.use(cors());
-app.use(express.static('../front/build'));
+const port = process.env.PORT || 4000;
+const router = Router();
 
 const options = { encoding: 'utf8' };
 
-const roomsJson = fs.readFileSync(path.resolve('./rooms.json'), options);
+const roomsJson = fs.readFileSync(
+  path.resolve(__dirname, '../../build/rooms.json'),
+  options
+);
 
 const roomsData = JSON.parse(roomsJson);
 
 const updateData = () => {
   const stringifiedData = JSON.stringify(roomsData);
-  fs.writeFile('./rooms.json', stringifiedData, () => console.log('zapisano'));
+  fs.writeFile(
+    path.resolve(__dirname, '../../build/rooms.json'),
+    stringifiedData,
+    () => console.log('zapisano')
+  );
 };
 
-app.use(express.json());
-
-app.get('/api', (req, res) => {
+router.get('/', (req, res) => {
   const startDate = req.query.checkInDate;
   const endDate = req.query.checkOutDate;
   const visitorsNumber = req.query.visitorsNumber;
@@ -45,7 +52,7 @@ app.get('/api', (req, res) => {
   res.status(200).send({ filteredRooms, roomsFilteredByCapacity });
 });
 
-app.post('/api', (req, res) => {
+router.post('/', (req, res) => {
   const startDate = req.body.checkInDate;
   const endDate = req.body.checkOutDate;
   const roomId = req.body.choosedRoomId;
@@ -61,22 +68,33 @@ app.post('/api', (req, res) => {
   res.sendStatus(200);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(`./images/${req.url}`));
-})
+router.get('/*.jpg', (req, res) => {
+  res.sendFile(path.join(__dirname, 'images', req.url));
+});
 
-app.post('/api/mail', (req, res) => {
-  console.log(req.body)
+router.post('/mail', (req, res) => {
+  console.log(req.body);
   const mail = req.body.email;
   const name = req.body.name;
+
   sendMail(mail, name)
     .then(() => {
       res.sendStatus(200);
     })
-    .catch(() => {
+    .catch(err => {
+      console.log(err);
       res.sendStatus(500);
     });
 });
+
+const pathToBuild = path.resolve(__dirname, '../../build');
+const opt = { extensions: ['html'] };
+
+app.use(cors());
+app.use(express.json());
+app.use('/', express.static(pathToBuild, opt));
+app.use('/api', router);
+app.use('*', express.static(pathToBuild, opt));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

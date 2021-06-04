@@ -1,9 +1,18 @@
+import SearchEngine from '../Reservation/SearchEngine';
 import './Home.scss';
 
 const Home = () => (
   <>
-    <div className='maldives-photo-div'>
-      <div className='welcome-content'></div>
+    <div className='landing-page-container'>
+
+      <div className='photo-div'></div>
+      <div className='welcome-content'>
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+        <div className='home-search-engine'>
+        <SearchEngine/>
+        </div>
+      </div>
+      
     </div>
 
     <div>

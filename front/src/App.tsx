@@ -7,30 +7,31 @@ import Reservation from './Reservation/Reservation';
 
 function App() {
   const [installEvent, setInstallEvent] = useState<any>();
-  const [isHeaderTransparent, setIsHeaderTransparent] = useState(true)
+  const [isHeaderTransparent, setIsHeaderTransparent] = useState(true);
 
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', event =>
       setInstallEvent(event)
     );
-    window.addEventListener('scroll', () => {setIsHeaderTransparent(!(window.scrollY > 80))})
+    window.addEventListener('scroll', () => {
+      setIsHeaderTransparent(!(window.scrollY > 80));
+    });
   }, []);
-
 
   return (
     <Router>
       <div className='App'>
-        <Navbar isHeaderTransparent={isHeaderTransparent}/>
+        <Navbar isHeaderTransparent={isHeaderTransparent} />
         <Switch>
           <Route path='/reservation'>
-            <Reservation/>
+            <Reservation />
           </Route>
           <Route path='/about'>
             <h3>O NAS</h3>
           </Route>
           <Route path='/'>
             <Home />
-            <button onClick={() => installEvent.prompt()}>download</button>
+            {/* <button onClick={() => installEvent.prompt()}>download</button> */}
           </Route>
         </Switch>
       </div>
