@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { apiUrl } from '../config';
 import { ChoosedRoomContext, RoomsDataContext } from './Reservation';
 import './ReservationForm.scss';
 
@@ -51,9 +52,9 @@ const ReservationForm = ({
             </p>
           </div>
           <div className='m-10'>
-              <p>
-                liczba osób: <span className='numbers'>{visitorsNumber}</span>
-              </p>
+            <p>
+              liczba osób: <span className='numbers'>{visitorsNumber}</span>
+            </p>
           </div>
 
           <p className='m-10'>
@@ -95,7 +96,7 @@ const ReservationForm = ({
                 )
               ) {
                 setReservationFormActive(false);
-                fetch('http://localhost:4000/api', {
+                fetch(`${apiUrl}`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ const ReservationForm = ({
           </button>
           <button
             onClick={() =>
-              fetch('http://localhost:4000/api/mail', {
+              fetch(`${apiUrl}/mail`, {
                 headers: { 'Content-Type': 'application/json' },
                 method: 'POST',
                 body: JSON.stringify({ email, name }),

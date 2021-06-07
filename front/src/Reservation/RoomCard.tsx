@@ -8,6 +8,7 @@ import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {ReservationDataContext} from './Reservation'
+import { apiUrl } from '../config';
 
 const RoomCard = ({
   room,
@@ -49,7 +50,7 @@ const RoomCard = ({
 
   return (
     <div className='card'>
-      <img src={`http://localhost:4000/api${room.image}`} alt='' />
+      <img src={`${apiUrl}${room.image}`} alt='' />
       <div className='card-body'>
         <h5 className='card-title'>{room.title}</h5>
         <div className='card-text'>
