@@ -5,7 +5,11 @@ import cors from 'cors';
 import { sendMail } from './mailer.js';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const appPath =
+  process.env.APP_PATH ||
+  path.join(fileURLToPath(import.meta.url), '../../../');
+
+console.log(appPath);
 
 const app = express();
 
@@ -15,7 +19,7 @@ const router = Router();
 const options = { encoding: 'utf8' };
 
 const roomsJson = fs.readFileSync(
-  path.resolve(__dirname, '../../build/rooms.json'),
+  path.resolve(appPath, './build/rooms.json'),
   options
 );
 
@@ -24,7 +28,7 @@ const roomsData = JSON.parse(roomsJson);
 const updateData = () => {
   const stringifiedData = JSON.stringify(roomsData);
   fs.writeFile(
-    path.resolve(__dirname, '../../build/rooms.json'),
+    path.resolve(appPath, './build/rooms.json'),
     stringifiedData,
     () => console.log('zapisano')
   );
@@ -69,7 +73,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/*.jpg', (req, res) => {
-  res.sendFile(path.join(__dirname, 'images', req.url));
+  res.sendFile(path.join(appPath, './build/images', req.url));
 });
 
 router.post('/mail', (req, res) => {
@@ -87,7 +91,7 @@ router.post('/mail', (req, res) => {
     });
 });
 
-const pathToBuild = path.resolve(__dirname, '../../build');
+const pathToBuild = path.resolve(appPath, './build');
 const opt = { extensions: ['html'] };
 
 app.use(cors());
