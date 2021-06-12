@@ -1,4 +1,4 @@
-import SearchEngine from '../Reservation/SearchEngine';
+import SearchEngine from '../Reservation/SearchEngine/SearchEngine';
 import './Home.scss';
 
 const Home = () => (

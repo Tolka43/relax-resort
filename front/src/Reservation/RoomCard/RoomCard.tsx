@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ChoosedRoomContext } from './Reservation';
+import { ChoosedRoomContext } from '../Reservation';
 import './RoomCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -7,8 +7,8 @@ import { useState } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import {ReservationDataContext} from './Reservation'
-import { apiUrl } from '../config';
+import {ReservationDataContext} from '../Reservation'
+import { apiUrl } from '../../config';
 
 const RoomCard = ({
   room,

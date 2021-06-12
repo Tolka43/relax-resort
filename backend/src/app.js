@@ -2,7 +2,6 @@ import express, { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
-import { sendMail } from './mailer.js';
 import { fileURLToPath } from 'url';
 
 const appPath =
@@ -74,21 +73,6 @@ router.post('/', (req, res) => {
 
 router.get('/*.jpg', (req, res) => {
   res.sendFile(path.join(appPath, './build/images', req.url));
-});
-
-router.post('/mail', (req, res) => {
-  console.log(req.body);
-  const mail = req.body.email;
-  const name = req.body.name;
-
-  sendMail(mail, name)
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    });
 });
 
 const pathToBuild = path.resolve(appPath, './build');

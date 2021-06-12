@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { ReservationDataContext } from './Reservation';
+import { ReservationDataContext } from '../Reservation';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 

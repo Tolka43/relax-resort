@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import useRoomsData from '../hooks/useRoomsData';
-import ReservationForm from './ReservationForm';
+import ReservationForm from './ReservationForm/ReservationForm';
 import ReservationSystem from './ReservationSystem';
 import moment from 'moment';
 import { Room } from '../hooks/useRoomsData';

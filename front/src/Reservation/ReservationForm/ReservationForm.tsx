@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import { apiUrl } from '../config';
-import { ChoosedRoomContext, RoomsDataContext } from './Reservation';
+import { apiUrl } from '../../config';
+import { ChoosedRoomContext, RoomsDataContext } from '../Reservation';
 import './ReservationForm.scss';
 
 interface ReservationFormProps {
@@ -81,12 +81,6 @@ const ReservationForm = ({
               <p className='invalid-email'>wpisz poprawny email</p>
             )}
           </div>
-          <div className='checkbox-div'>
-            <input type='checkbox' id='check' />{' '}
-            <label className='check-label' htmlFor='check'>
-              Wyrażam zgodę na otrzymanie e-maila
-            </label>
-          </div>
           <button
             className='m-10'
             onClick={() => {
@@ -119,23 +113,12 @@ const ReservationForm = ({
           >
             zarezerwuj
           </button>
-          <button
-            onClick={() =>
-              fetch(`${apiUrl}/mail`, {
-                headers: { 'Content-Type': 'application/json' },
-                method: 'POST',
-                body: JSON.stringify({ email, name }),
-              })
-            }
-          ></button>
           <h2
             className='numbers close-button'
             onClick={() => setReservationFormActive(false)}
           >
             x
           </h2>
-          {/* <FontAwesomeIcon icon={faTimes} className='close-button'
-          onClick={() => setReservationFormActive(false)}/> */}
         </div>
       </div>
     </div>

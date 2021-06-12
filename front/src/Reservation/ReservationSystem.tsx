@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import RoomCard from './RoomCard';
+import RoomCard from './RoomCard/RoomCard';
 import { RoomsDataContext } from './Reservation';
-import './SearchEngine.scss';
-import SearchEngine from './SearchEngine'
+import './SearchEngine/SearchEngine.scss';
+import SearchEngine from './SearchEngine/SearchEngine'
 
 const ReservationSystem = ({
   visitorsNumber,
