@@ -1,22 +1,15 @@
 import { useContext, useState } from 'react';
 import { apiUrl } from '../../config';
 import { ChoosedRoomContext, RoomsDataContext } from '../Reservation';
+import { ReservationDataContext } from '../../App';
 import './ReservationForm.scss';
 
 interface ReservationFormProps {
-  visitorsNumber: number;
-  checkInDate: string;
-  setCheckInDate: (value: string) => void;
-  checkOutDate: string;
-  setCheckOutDate: (value: string) => void;
   setReservationFormActive: (value: boolean) => void;
 }
 
 const ReservationForm = ({
-  visitorsNumber,
-  checkInDate,
-  checkOutDate,
-  setReservationFormActive,
+  setReservationFormActive
 }: ReservationFormProps) => {
   const [name, setName] = useState('Dziękujemy');
   const [email, setEmail] = useState('');
@@ -28,6 +21,8 @@ const ReservationForm = ({
     roomsFilteredByCapacity,
     searchingActive,
   } = useContext(RoomsDataContext);
+
+  const {checkInDate, checkOutDate, visitorsNumber} = useContext(ReservationDataContext)
 
   const differenceInTime =
     new Date(checkOutDate).getTime() - new Date(checkInDate).getTime();

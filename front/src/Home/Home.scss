@@ -1,3 +1,15 @@
+.home-search-engine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-reservation-button {
+  height: 42px;
+  width: 150px;
+  // border: 1px solid grey;
+}
+
 .landing-page-container {
   padding: 90px 20px 50px;
   background-color: #ccc5c2;

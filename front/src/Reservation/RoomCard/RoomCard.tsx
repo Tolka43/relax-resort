@@ -7,7 +7,7 @@ import { useState } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import {ReservationDataContext} from '../Reservation'
+import {ReservationDataContext} from '../../App'
 import { apiUrl } from '../../config';
 
 const RoomCard = ({

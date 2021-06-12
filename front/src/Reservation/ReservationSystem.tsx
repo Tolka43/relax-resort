@@ -2,24 +2,22 @@ import { useContext, useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import RoomCard from './RoomCard/RoomCard';
 import { RoomsDataContext } from './Reservation';
+import { ReservationDataContext } from '../App';
 import './SearchEngine/SearchEngine.scss';
-import SearchEngine from './SearchEngine/SearchEngine'
+import SearchEngine from './SearchEngine/SearchEngine';
 
-const ReservationSystem = ({
-  visitorsNumber,
-  setReservationFormActive,
-  checkInDate,
-  checkOutDate,
-}: any) => {
+const ReservationSystem = ({ setReservationFormActive }: any) => {
   const {
     getRooms,
     basicFilteredRoom,
     roomsFilteredByCapacity,
     searchingActive,
   } = useContext(RoomsDataContext);
+  const { visitorsNumber, checkInDate, checkOutDate } = useContext(
+    ReservationDataContext
+  );
 
   const [show, setShow] = useState(false);
-  
 
   useEffect(() => {
     getRooms(visitorsNumber, checkInDate, checkOutDate);
@@ -29,9 +27,7 @@ const ReservationSystem = ({
   return (
     <>
       <div className='flowers-background'>
-        
-
-        <SearchEngine setShow={setShow} show={show}/>
+        <SearchEngine setShow={setShow} show={show} />
 
         <div>
           {basicFilteredRoom.length > 0 ? (
