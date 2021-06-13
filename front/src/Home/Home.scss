@@ -4,6 +4,24 @@
   align-items: center;
 }
 
+.button-link {
+  text-decoration: none;
+}
+
+.button-link {
+  text-decoration: none;
+}
+
+.little-text {
+  &.phone {
+    color: black;
+  }
+  font-size: 30px;
+  color: #1a1a1a;
+  text-align: center;
+  font-family: 'tangerine', sans-serif;
+}
+
 .home-reservation-button {
   &.phone {
     display: none;
@@ -13,9 +31,10 @@
 }
 
 .landing-page-container {
-  padding: 90px 20px 50px;
+  padding: 90px 30px 50px;
   background-color: #ccc5c2;
   display: flex;
+  height: calc(100vh - 140px);
 }
 
 .welcome-content {
@@ -31,7 +50,7 @@
 
 .photo-div {
   background-image: url('../images/hotel3.jpg');
-  min-height: 100vh;
+  min-height: calc(100vh - 140px);
   width: 50vw;
   background-position: center;
   background-repeat: no-repeat;
@@ -48,16 +67,18 @@
   .home-reservation-button.phone {
     &:hover {
       font-size: medium;
-    font-weight: 500;
+      font-weight: 500;
       color: white;
       background-color: #525252;
+      border: none;
       border: 1px solid #525252;
     }
     display: block;
     color: black;
     font-size: 15px;
-    // font-weight: 500;
+    font-weight: 600;
     border: 1px solid black;
+    margin: 20px;
   }
   .welcome-content {
     text-align: center;
@@ -83,6 +104,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
   }
   .home-search-engine {
     display: none;

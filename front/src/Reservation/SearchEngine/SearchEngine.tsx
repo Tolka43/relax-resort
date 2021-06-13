@@ -16,7 +16,6 @@ const SearchEngine = () => {
   const [startDate, setStartDate] = useState<any>();
 
   const [endDate, setEndDate] = useState(null);
-  const [disabledDates, setDisabledDates] = useState<Date[]>([]);
   const onChange = dates => {
     const [start, end] = dates;
     const lastDate =
@@ -51,12 +50,11 @@ const SearchEngine = () => {
           <div className='datepicker-modal'>
             <div className='datepicker-modal-body'>
           <DatePicker
-          // className='modal-content'
+          className='modal-content'
             selected={startDate}
             onChange={onChange}
             startDate={startDate}
             endDate={endDate}
-            excludeDates={disabledDates}
             minDate={new Date()}
             selectsRange
             inline

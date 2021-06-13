@@ -82,7 +82,7 @@ const ReservationForm = ({
                 )
               ) {
                 setReservationFormActive(false);
-                fetch(`${apiUrl}`, {
+                fetch(`${apiUrl}/reservations`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',

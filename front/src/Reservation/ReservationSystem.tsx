@@ -1,21 +1,16 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import RoomCard from './RoomCard/RoomCard';
 import { RoomsDataContext } from '../App';
-import { ReservationDataContext } from '../App';
 import './SearchEngine/SearchEngine.scss';
 import SearchEngine from './SearchEngine/SearchEngine';
 
 const ReservationSystem = ({ setReservationFormActive }: any) => {
   const {
-    getRooms,
     basicFilteredRoom,
     roomsFilteredByCapacity,
     searchingActive,
   } = useContext(RoomsDataContext);
-  const { visitorsNumber, checkInDate, checkOutDate } = useContext(
-    ReservationDataContext
-  );
 
   return (
     <>

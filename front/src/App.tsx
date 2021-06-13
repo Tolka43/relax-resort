@@ -92,9 +92,9 @@ function App() {
               <Route path='/reservation'>
                 <Reservation />
               </Route>
-              <Route path='/about'>
+              {/* <Route path='/about'>
                 <h3>O NAS</h3>
-              </Route>
+              </Route> */}
               <Route path='/'>
                 <Home />
               </Route>
