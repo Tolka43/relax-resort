@@ -15,41 +15,21 @@ const defaultChoosedRoom: choosedRoom = {
   setChoosedRoomId: () => {},
 };
 
-interface RoomsData {
-  getRooms: any;
-  basicFilteredRoom: Room[] | any;
-  roomsFilteredByCapacity: Room[] | any;
-  searchingActive: boolean;
-}
 
 
 
 export const ChoosedRoomContext =
   createContext<choosedRoom>(defaultChoosedRoom);
-export const RoomsDataContext = createContext<RoomsData>(undefined as any);
 
 const Reservation = () => {
   
   const [reservationFormActive, setReservationFormActive] = useState(false);
   const [choosedRoomId, setChoosedRoomId] = useState<number | any>();
-  const {
-    getRooms,
-    basicFilteredRoom,
-    roomsFilteredByCapacity,
-    searchingActive,
-  } = useRoomsData();
 
   return (
     <div>
       
-        <RoomsDataContext.Provider
-          value={{
-            getRooms,
-            basicFilteredRoom,
-            roomsFilteredByCapacity,
-            searchingActive,
-          }}
-        >
+        
           <ChoosedRoomContext.Provider
             value={{ choosedRoomId, setChoosedRoomId }}
           >
@@ -62,7 +42,6 @@ const Reservation = () => {
               />
             )}
           </ChoosedRoomContext.Provider>
-        </RoomsDataContext.Provider>
     </div>
   );
 };

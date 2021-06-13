@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { apiUrl } from '../../config';
-import { ChoosedRoomContext, RoomsDataContext } from '../Reservation';
-import { ReservationDataContext } from '../../App';
+import { ChoosedRoomContext} from '../Reservation';
+import { ReservationDataContext, RoomsDataContext } from '../../App';
 import './ReservationForm.scss';
 
 interface ReservationFormProps {
@@ -16,10 +16,7 @@ const ReservationForm = ({
   const [validEmail, setValidEmail] = useState(true);
   const { choosedRoomId } = useContext(ChoosedRoomContext);
   const {
-    getRooms,
-    basicFilteredRoom,
-    roomsFilteredByCapacity,
-    searchingActive,
+    roomsFilteredByCapacity
   } = useContext(RoomsDataContext);
 
   const {checkInDate, checkOutDate, visitorsNumber} = useContext(ReservationDataContext)

@@ -3,8 +3,9 @@ import Navbar from './Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home/Home';
 import { createContext, useEffect, useState } from 'react';
-import Reservation from './Reservation/Reservation';
 import moment from 'moment';
+import useRoomsData, { Room } from './hooks/useRoomsData';
+import Reservation from './Reservation/Reservation';
 
 interface ReservationData {
   checkInDate: string;
@@ -14,19 +15,23 @@ interface ReservationData {
   visitorsNumber: number;
   setVisitorsNumber: (value: number) => void;
 }
+interface RoomsData {
+  getRooms: any;
+  basicFilteredRoom: Room[] | any;
+  roomsFilteredByCapacity: Room[] | any;
+  searchingActive: boolean;
+}
 
-const defaultReservationData: ReservationData = {
-  checkInDate: '',
-  checkOutDate: '',
-  setCheckInDate: () => {},
-  setCheckOutDate: () => {},
-  visitorsNumber: 1,
-  setVisitorsNumber: () => {},
-};
+interface ShowDatepicker {
+  show: boolean;
+  setShow: (value: boolean) => void;
+}
 
 export const ReservationDataContext = createContext<ReservationData>(
-  defaultReservationData
+  undefined as any
 );
+export const RoomsDataContext = createContext<RoomsData>(undefined as any);
+export const ShowDatepickerContext = createContext<ShowDatepicker>(undefined as any);
 
 function App() {
   function specificDayDate(specificDay) {
@@ -35,17 +40,26 @@ function App() {
     const specificDayDateAsString = specificDayDate.format('YYYY-MM-DD');
     return specificDayDateAsString;
   }
-  const [installEvent, setInstallEvent] = useState<any>();
   const [isHeaderTransparent, setIsHeaderTransparent] = useState(true);
 
   const [checkInDate, setCheckInDate] = useState(specificDayDate(5));
   const [checkOutDate, setCheckOutDate] = useState(specificDayDate(7));
   const [visitorsNumber, setVisitorsNumber] = useState(1);
+  const {
+    getRooms,
+    basicFilteredRoom,
+    roomsFilteredByCapacity,
+    searchingActive,
+  } = useRoomsData();
+
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('beforeinstallprompt', event =>
-      setInstallEvent(event)
-    );
+    getRooms(visitorsNumber, checkInDate, checkOutDate);
+    setShow(false);
+  }, [checkOutDate, visitorsNumber]);
+
+  useEffect(() => {
     window.addEventListener('scroll', () => {
       setIsHeaderTransparent(!(window.scrollY > 80));
     });
@@ -53,32 +67,42 @@ function App() {
 
   return (
     <Router>
-      <ReservationDataContext.Provider
+      <ShowDatepickerContext.Provider value={{show, setShow}}>
+      <RoomsDataContext.Provider
         value={{
-          checkInDate,
-          checkOutDate,
-          setCheckInDate,
-          setCheckOutDate,
-          visitorsNumber,
-          setVisitorsNumber,
+          getRooms,
+          basicFilteredRoom,
+          roomsFilteredByCapacity,
+          searchingActive,
         }}
       >
-        <div className='App'>
-          <Navbar isHeaderTransparent={isHeaderTransparent} />
-          <Switch>
-            <Route path='/reservation'>
-              <Reservation />
-            </Route>
-            <Route path='/about'>
-              <h3>O NAS</h3>
-            </Route>
-            <Route path='/'>
-              <Home />
-              {/* <button onClick={() => installEvent.prompt()}>download</button> */}
-            </Route>
-          </Switch>
-        </div>
-      </ReservationDataContext.Provider>
+        <ReservationDataContext.Provider
+          value={{
+            checkInDate,
+            checkOutDate,
+            setCheckInDate,
+            setCheckOutDate,
+            visitorsNumber,
+            setVisitorsNumber,
+          }}
+        >
+          <div className='App'>
+            <Navbar isHeaderTransparent={isHeaderTransparent} />
+            <Switch>
+              <Route path='/reservation'>
+                <Reservation />
+              </Route>
+              <Route path='/about'>
+                <h3>O NAS</h3>
+              </Route>
+              <Route path='/'>
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </ReservationDataContext.Provider>
+      </RoomsDataContext.Provider>
+      </ShowDatepickerContext.Provider>
     </Router>
   );
 }

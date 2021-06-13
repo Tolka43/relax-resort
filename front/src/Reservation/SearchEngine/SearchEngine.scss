@@ -27,8 +27,6 @@
   margin-bottom: 20px;
 }
 
-
-
 .date-group > input,
 .number-input {
   padding: 8px;
@@ -56,15 +54,25 @@
   flex-wrap: wrap;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.76);
-  // background-color: #bfb7b479;
   padding: 20px;
 }
 
-.react-datepicker {
+.datepicker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 2;
-  position: absolute;
-  padding: 5px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.233);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-datepicker {
   border-radius: 0;
+  background-color: white;
   &__header {
     background-color: white;
   }
@@ -79,7 +87,7 @@
     background-color: white;
   }
   &__day {
-    padding: 4px;
+    padding: 6px;
     margin: 0;
     border-radius: 0;
     &:hover {

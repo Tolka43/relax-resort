@@ -5,33 +5,23 @@
 }
 
 .home-reservation-button {
+  &.phone {
+    display: none;
+  }
   height: 42px;
-  width: 150px;
-  // border: 1px solid grey;
+  width: 200px;
 }
 
 .landing-page-container {
   padding: 90px 20px 50px;
   background-color: #ccc5c2;
   display: flex;
-
-}
-
-.photo-div {
-  background-image: url('../images/hotel3.jpg');
-  min-height: 100vh ;
-  width: 50vw;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  // filter: brightness(80%);
-  // align-items: center;
-  // justify-content: center;
 }
 
 .welcome-content {
-  // position: relative;
-  // top: 110px;
+  &.phone {
+    display: none;
+  }
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -39,11 +29,61 @@
   padding: 100px 30px;
 }
 
-// .home-search-engine {
-//   background-color: rgb(253, 253, 253);
-// }
+.photo-div {
+  background-image: url('../images/hotel3.jpg');
+  min-height: 100vh;
+  width: 50vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 @media screen and (max-width: 820px) {
+  .home-reservation-button-container {
+    display: none;
+    &.phone {
+      display: block;
+    }
+  }
+  .home-reservation-button.phone {
+    &:hover {
+      font-size: medium;
+    font-weight: 500;
+      color: white;
+      background-color: #525252;
+      border: 1px solid #525252;
+    }
+    display: block;
+    color: black;
+    font-size: 15px;
+    // font-weight: 500;
+    border: 1px solid black;
+  }
+  .welcome-content {
+    text-align: center;
+    display: none;
+    &.phone {
+      display: flex;
+      position: unset;
+    }
+  }
+  .landing-page-container {
+    padding: 0;
+    background-color: white;
+    height: 80vh;
+  }
+  .photo-div {
+    background-image: url('../images/hotel3.jpg');
+    opacity: 90%;
+    min-height: 50vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .home-search-engine {
     display: none;
   }

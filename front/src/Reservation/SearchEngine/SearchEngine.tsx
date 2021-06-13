@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
-import { ReservationDataContext } from '../../App';
+import { ReservationDataContext, ShowDatepickerContext } from '../../App';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-const SearchEngine = ({ setShow, show }: any) => {
+const SearchEngine = () => {
+  const {show, setShow} = useContext(ShowDatepickerContext)
   const {
     checkInDate,
     checkOutDate,
@@ -47,7 +48,10 @@ const SearchEngine = ({ setShow, show }: any) => {
           />
         </div>
         {show && (
+          <div className='datepicker-modal'>
+            <div className='datepicker-modal-body'>
           <DatePicker
+          // className='modal-content'
             selected={startDate}
             onChange={onChange}
             startDate={startDate}
@@ -59,6 +63,8 @@ const SearchEngine = ({ setShow, show }: any) => {
           >
             <div className='small-info'>wybierz przedział dat</div>
           </DatePicker>
+          </div>
+          </div>
         )}
 
         <div className='date-group'>
