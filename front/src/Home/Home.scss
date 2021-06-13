@@ -34,7 +34,7 @@
   padding: 90px 30px 50px;
   background-color: #ccc5c2;
   display: flex;
-  height: calc(100vh - 140px);
+  height: 100vh;
 }
 
 .welcome-content {
@@ -45,12 +45,12 @@
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
-  padding: 100px 30px;
+  padding: 100px;
 }
 
 .photo-div {
   background-image: url('../images/hotel3.jpg');
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 80px);
   width: 50vw;
   background-position: center;
   background-repeat: no-repeat;
