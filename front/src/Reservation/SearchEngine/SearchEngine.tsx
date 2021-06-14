@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { ReservationDataContext, ShowDatepickerContext } from '../../App';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
 const SearchEngine = () => {
-  const {show, setShow} = useContext(ShowDatepickerContext)
+  const { show, setShow } = useContext(ShowDatepickerContext);
   const {
     checkInDate,
     checkOutDate,
@@ -25,13 +25,21 @@ const SearchEngine = () => {
     setCheckInDate(moment(start).format('YYYY-MM-DD'));
     setCheckOutDate(lastDate);
   };
+
+  const modalRef = useRef(null);
+  const closeModal = event => {
+    if (modalRef.current === event.target) {
+      setShow(false);
+    }
+  };
+
   return (
     <div className='search-engine'>
       <div className='search-form'>
         <div className='date-group'>
           <label htmlFor=''>dzień przyjazdu</label> <br />
           <input
-          readOnly
+            readOnly
             type='text'
             value={checkInDate}
             onClick={() => setShow(true)}
@@ -40,28 +48,28 @@ const SearchEngine = () => {
         <div className='date-group'>
           <label htmlFor=''>dzień wyjazdu</label> <br />
           <input
-          readOnly
+            readOnly
             type='text'
             value={checkOutDate}
             onClick={() => setShow(true)}
           />
         </div>
         {show && (
-          <div className='datepicker-modal'>
+          <div ref={modalRef} onClick={closeModal} className='datepicker-modal'>
             <div className='datepicker-modal-body'>
-          <DatePicker
-          className='modal-content'
-            selected={startDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            minDate={new Date()}
-            selectsRange
-            inline
-          >
-            <div className='small-info'>wybierz przedział dat</div>
-          </DatePicker>
-          </div>
+              <DatePicker
+                // className='modal-content'
+                selected={startDate}
+                onChange={onChange}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={new Date()}
+                selectsRange
+                inline
+              >
+                <div className='small-info'>wybierz przedział dat</div>
+              </DatePicker>
+            </div>
           </div>
         )}
 

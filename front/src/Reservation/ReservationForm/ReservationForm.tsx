@@ -32,7 +32,7 @@ const ReservationForm = ({
     <div className='modal'>
       <div className='modal-body'>
         <div className='modal-content'>
-          <h2 className='m-10'>REZERWACJA</h2>
+          <h3 className='m-10'>REZERWACJA</h3>
           <div className='m-10'>
             <p>
               dzień przyjazdu: <span className='numbers'>{checkInDate}</span>

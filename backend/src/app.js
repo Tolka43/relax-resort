@@ -8,13 +8,12 @@ const appPath =
   process.env.APP_PATH ||
   path.join(fileURLToPath(import.meta.url), '../../../');
 
-console.log(appPath);
 
 const app = express();
 
 const port = process.env.PORT || 4000;
 const router = Router();
-const reservationsRouter = Router()
+const reservationsRouter = Router();
 
 const options = { encoding: 'utf8' };
 
@@ -79,12 +78,13 @@ router.get('/*.jpg', (req, res) => {
 const pathToBuild = path.resolve(appPath, './build');
 const opt = { extensions: ['html'] };
 
-app.use(cors());
-app.use(express.json());
-app.use('/', express.static(pathToBuild, opt));
-app.use('/api', router);
-app.use('/api/reservations', reservationsRouter)
-app.use('*', express.static(pathToBuild, opt));
+app
+  .use(cors())
+  .use(express.json())
+  .use('/', express.static(pathToBuild, opt))
+  .use('/api', router)
+  .use('/api/reservations', reservationsRouter)
+  .use('*', express.static(pathToBuild, opt));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -30,16 +30,16 @@ button {
     background-color: rgb(82, 82, 82);
     color: white;
   }
-  font-family: 'Cormorant Garamond', serif;
+  // font-family: 'Cormorant Garamond', serif;
+  font-family: 'Amiri', serif;
+  font-weight: 500;
   background-color: transparent;
   color: black;
   cursor: pointer;
-  padding: 7px 14px;
+  padding: 5px 15px;
   border: 1px solid #525252;
+  margin: 5px;
   // border-radius: 3px;
 }
 
-h2 {
-  font-family: adobe-garamond-pro, serif;
-  color: rgb(29, 29, 29);
-}
+
