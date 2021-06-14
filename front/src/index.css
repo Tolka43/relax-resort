@@ -1,9 +1,10 @@
 @import url("https://use.typekit.net/fjc6arl.css");
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri&family=Cinzel&family=Cormorant+Garamond:wght@300;400&family=Playfair+Display&display=swap');
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* font-family: 'Cinzel', serif; */
+  font-family: 'Amiri', serif;
+  font-weight: 500;
 }

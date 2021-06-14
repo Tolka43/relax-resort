@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ChoosedRoomContext } from './Reservation';
+import { ChoosedRoomContext } from '../Reservation';
 import './RoomCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBed, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -7,17 +7,17 @@ import { useState } from 'react';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import {ReservationDataContext} from './Reservation'
-import { apiUrl } from '../config';
+import { ReservationDataContext } from '../../App';
+import { apiUrl } from '../../config';
 
 const RoomCard = ({
   room,
   availabilityButton,
-  setReservationFormActive
+  setReservationFormActive,
 }: any) => {
-  const {checkOutDate,
-    setCheckInDate,
-    setCheckOutDate} = useContext(ReservationDataContext)
+  const { checkOutDate, setCheckInDate, setCheckOutDate } = useContext(
+    ReservationDataContext
+  );
   const { setChoosedRoomId } = useContext(ChoosedRoomContext);
   const [startDate, setStartDate] = useState<any>();
   const [show, setShow] = useState(false);
@@ -26,11 +26,12 @@ const RoomCard = ({
 
   const onChange = dates => {
     const [start, end] = dates;
-    const lastDate = end === null ? checkOutDate : moment(end).format('YYYY-MM-DD')
+    const lastDate =
+      end === null ? checkOutDate : moment(end).format('YYYY-MM-DD');
     setStartDate(start);
     setEndDate(end);
-    setCheckInDate(moment(start).format('YYYY-MM-DD'))
-    setCheckOutDate(lastDate)
+    setCheckInDate(moment(start).format('YYYY-MM-DD'));
+    setCheckOutDate(lastDate);
   };
 
   const findDisabledDates = () => {
@@ -42,7 +43,7 @@ const RoomCard = ({
         dates.push(firstDate.toDate());
         firstDate = firstDate.add(1, 'days');
       }
-      dates.push(lastDate.toDate())
+      dates.push(lastDate.toDate());
     });
 
     setDisabledDates(dates);
@@ -64,7 +65,7 @@ const RoomCard = ({
           <p>cena/noc: {room.price}zł</p>
         </div>
         {availabilityButton && (
-          <div >
+          <div>
             <button
               onClick={() => {
                 setShow(!show);
@@ -74,17 +75,20 @@ const RoomCard = ({
               sprawdź dostępność
             </button>{' '}
             {show && (
-              <DatePicker
-                selected={startDate}
-                className='availability-picker'
-                onChange={onChange}
-                startDate={startDate}
-                endDate={endDate}
-                excludeDates={disabledDates}
-                minDate={new Date()}
-                selectsRange
-                inline
-              ><div className='small-info'>wybierz przedział dat</div></DatePicker>
+              <div className='availability-picker'>
+                <DatePicker
+                  selected={startDate}
+                  onChange={onChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  excludeDates={disabledDates}
+                  minDate={new Date()}
+                  selectsRange
+                  inline
+                >
+                  <div className='small-info'>wybierz przedział dat</div>
+                </DatePicker>
+              </div>
             )}
           </div>
         )}

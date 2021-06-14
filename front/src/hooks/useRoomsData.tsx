@@ -22,7 +22,7 @@ const useRoomsData = () => {
     checkOutDate: string
   ) => {
     fetch(
-      `${apiUrl}?visitorsNumber=${visitorsNumber}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+      `${apiUrl}/reservations?visitorsNumber=${visitorsNumber}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
     )
       .then(res => res.json())
       .then(res => {
