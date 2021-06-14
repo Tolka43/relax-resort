@@ -58,7 +58,6 @@ const SearchEngine = () => {
           <div ref={modalRef} onClick={closeModal} className='datepicker-modal'>
             <div className='datepicker-modal-body'>
               <DatePicker
-                // className='modal-content'
                 selected={startDate}
                 onChange={onChange}
                 startDate={startDate}
@@ -85,6 +84,11 @@ const SearchEngine = () => {
               setVisitorsNumber(Number(event.target.value));
             }}
           />
+          {visitorsNumber > 0 && visitorsNumber <= 4 ? null : (
+            <p className='visitorsnumber-alert'>
+              wybierz liczbę z przedziału 1-4
+            </p>
+          )}
         </div>
       </div>
     </div>
