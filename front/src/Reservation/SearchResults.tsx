@@ -1,5 +1,5 @@
 import useRoomsData from '../hooks/useRoomsData';
-import OfferCard from './RoomCard';
+import OfferCard from './RoomCard/RoomCard';
 
 const SearchResults = ({ setReservationFormActive }: any) => {
   const {

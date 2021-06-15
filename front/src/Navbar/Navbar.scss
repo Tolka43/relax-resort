@@ -5,7 +5,7 @@
   position: fixed;
   top: 0px;
   width: 100%;
-  z-index: 2;
+  z-index: 4;
   transition: height 1s, background-color 1s;
 }
 
@@ -45,7 +45,6 @@
 }
 
 .nav-logo-little {
-  // font-size: 20px;
   font-family: 'tangerine', sans-serif;
 }
 
@@ -53,6 +52,7 @@
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+  z-index: 4;
 }
 
 li {

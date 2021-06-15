@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react';
-import { ReservationDataContext } from './Reservation';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { ReservationDataContext, ShowDatepickerContext } from '../../App';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
-const SearchEngine = ({ setShow, show }: any) => {
+const SearchEngine = () => {
+  const { show, setShow } = useContext(ShowDatepickerContext);
   const {
     checkInDate,
     checkOutDate,
@@ -15,7 +16,6 @@ const SearchEngine = ({ setShow, show }: any) => {
   const [startDate, setStartDate] = useState<any>();
 
   const [endDate, setEndDate] = useState(null);
-  const [disabledDates, setDisabledDates] = useState<Date[]>([]);
   const onChange = dates => {
     const [start, end] = dates;
     const lastDate =
@@ -25,13 +25,21 @@ const SearchEngine = ({ setShow, show }: any) => {
     setCheckInDate(moment(start).format('YYYY-MM-DD'));
     setCheckOutDate(lastDate);
   };
+
+  const modalRef = useRef(null);
+  const closeModal = event => {
+    if (modalRef.current === event.target) {
+      setShow(false);
+    }
+  };
+
   return (
     <div className='search-engine'>
       <div className='search-form'>
         <div className='date-group'>
           <label htmlFor=''>dzień przyjazdu</label> <br />
           <input
-          readOnly
+            readOnly
             type='text'
             value={checkInDate}
             onClick={() => setShow(true)}
@@ -40,25 +48,28 @@ const SearchEngine = ({ setShow, show }: any) => {
         <div className='date-group'>
           <label htmlFor=''>dzień wyjazdu</label> <br />
           <input
-          readOnly
+            readOnly
             type='text'
             value={checkOutDate}
             onClick={() => setShow(true)}
           />
         </div>
         {show && (
-          <DatePicker
-            selected={startDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            excludeDates={disabledDates}
-            minDate={new Date()}
-            selectsRange
-            inline
-          >
-            <div className='small-info'>wybierz przedział dat</div>
-          </DatePicker>
+          <div ref={modalRef} onClick={closeModal} className='datepicker-modal'>
+            <div className='datepicker-modal-body'>
+              <DatePicker
+                selected={startDate}
+                onChange={onChange}
+                startDate={startDate}
+                endDate={endDate}
+                minDate={new Date()}
+                selectsRange
+                inline
+              >
+                <div className='small-info'>wybierz przedział dat</div>
+              </DatePicker>
+            </div>
+          </div>
         )}
 
         <div className='date-group'>
@@ -73,6 +84,11 @@ const SearchEngine = ({ setShow, show }: any) => {
               setVisitorsNumber(Number(event.target.value));
             }}
           />
+          {visitorsNumber > 0 && visitorsNumber <= 4 ? null : (
+            <p className='visitorsnumber-alert'>
+              wybierz liczbę z przedziału 1-4
+            </p>
+          )}
         </div>
       </div>
     </div>

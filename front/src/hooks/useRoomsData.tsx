@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiUrl } from '../config';
 
 export interface Room {
   id: number;
@@ -10,7 +11,9 @@ export interface Room {
 
 const useRoomsData = () => {
   const [basicFilteredRoom, setBasicFilteredRooms] = useState<Room[]>([]);
-  const [roomsFilteredByCapacity, setRoomsFilteredByCapacity] = useState<Room[]>([]);
+  const [roomsFilteredByCapacity, setRoomsFilteredByCapacity] = useState<
+    Room[]
+  >([]);
   const [searchingActive, setSearchingActive] = useState(false);
 
   const getRooms = (
@@ -19,7 +22,7 @@ const useRoomsData = () => {
     checkOutDate: string
   ) => {
     fetch(
-      `http://localhost:4000/api?visitorsNumber=${visitorsNumber}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+      `${apiUrl}/reservations?visitorsNumber=${visitorsNumber}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
     )
       .then(res => res.json())
       .then(res => {

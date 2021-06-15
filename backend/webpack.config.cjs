@@ -6,6 +6,6 @@ module.exports = {
   target: 'node',
   output: {
     path: path.resolve(__dirname, '../build'),
-    filename: 'main.cjs'
+    filename: 'index.js'
   },
 };

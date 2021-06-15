@@ -22,11 +22,12 @@ const Navbar = ({isHeaderTransparent}:any) => {
           </Link>
         </div>
         <ul className={`${active ? 'nav-menu active' : 'nav-menu'} ${isHeaderTransparent && 'transparent'}`}>
-          <li className='nav-item'>
+          {/* <li className='nav-item'>
             <Link onClick={handleClose} className='nav-link' to='/about'>
               o nas
             </Link>
-          </li>
+          </li> */}
+          <li></li>
           <li className='nav-item'>
             <Link onClick={handleClose} className='nav-link' to='/reservation'>
               zarezerwuj
