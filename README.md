@@ -1,5 +1,7 @@
 # Relax Resort
-Simple app that will allow you to book a room for your holiday.
+App that will allow you to book a room for your holiday.
+
+check it out here: https://relax-resort.herokuapp.com/
 
 landing page             |  reservation system
 :-------------------------:|:-------------------------:
@@ -10,12 +12,12 @@ I created this app to improve my React skills.
 
 ## Technologies
 Project is created with: 
-* react
-* typescript
+* React.js
+* TypeScript
 * HTML5
-* scss
-* node.js
-* express
+* SCSS
+* Node.js
+* Express.js
 
 ## Setup
 To run this project, install it locally using npm:
