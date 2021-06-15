@@ -1,6 +1,7 @@
-# Realx Resort
+# Relax Resort
 Simple app that will allow you to book a room for your holiday.
 
+![Alt text](./landing-page-screenshot.png?raw=true "Title")
 ## General info
 I created this app to improve my React skills.
 
