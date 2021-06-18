@@ -8,7 +8,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.scss';
 
-const Navbar = ({isHeaderTransparent}:any) => {
+interface NavbarProps {
+  isHeaderTransparent: boolean;
+}
+
+const Navbar = ({isHeaderTransparent}:NavbarProps) => {
   const [active, setActive] = useState(false);
   const handleClose = () => setActive(false);
   return (

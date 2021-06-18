@@ -9,12 +9,15 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ReservationDataContext } from '../../App';
 import { apiUrl } from '../../config';
+import { Room } from '../../hooks/useRoomsData';
 
-const RoomCard = ({
-  room,
-  availabilityButton,
-  setReservationFormActive,
-}: any) => {
+interface RoomCardProps {
+  room: Room;
+  availabilityButton: boolean;
+  setReservationFormActive: (value: boolean) => void;
+}
+
+const RoomCard = ({ room, availabilityButton, setReservationFormActive }: RoomCardProps) => {
   const { checkOutDate, setCheckInDate, setCheckOutDate } = useContext(
     ReservationDataContext
   );

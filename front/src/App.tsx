@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home/Home';
 import { createContext, useEffect, useState } from 'react';
 import moment from 'moment';
-import useRoomsData, { Room } from './hooks/useRoomsData';
+import useRoomsData, { RoomsData } from './hooks/useRoomsData';
 import Reservation from './Reservation/Reservation';
 
 interface ReservationData {
@@ -15,12 +15,7 @@ interface ReservationData {
   visitorsNumber: number;
   setVisitorsNumber: (value: number) => void;
 }
-interface RoomsData {
-  getRooms: any;
-  basicFilteredRoom: Room[] | any;
-  roomsFilteredByCapacity: Room[] | any;
-  searchingActive: boolean;
-}
+
 
 interface ShowDatepicker {
   show: boolean;
@@ -31,7 +26,9 @@ export const ReservationDataContext = createContext<ReservationData>(
   undefined as any
 );
 export const RoomsDataContext = createContext<RoomsData>(undefined as any);
-export const ShowDatepickerContext = createContext<ShowDatepicker>(undefined as any);
+export const ShowDatepickerContext = createContext<ShowDatepicker>(
+  undefined as any
+);
 
 function App() {
   function specificDayDate(specificDay) {
@@ -47,7 +44,7 @@ function App() {
   const [visitorsNumber, setVisitorsNumber] = useState(1);
   const {
     getRooms,
-    basicFilteredRoom,
+    basicFilteredRooms,
     roomsFilteredByCapacity,
     searchingActive,
   } = useRoomsData();
@@ -67,41 +64,41 @@ function App() {
 
   return (
     <Router>
-      <ShowDatepickerContext.Provider value={{show, setShow}}>
-      <RoomsDataContext.Provider
-        value={{
-          getRooms,
-          basicFilteredRoom,
-          roomsFilteredByCapacity,
-          searchingActive,
-        }}
-      >
-        <ReservationDataContext.Provider
+      <ShowDatepickerContext.Provider value={{ show, setShow }}>
+        <RoomsDataContext.Provider
           value={{
-            checkInDate,
-            checkOutDate,
-            setCheckInDate,
-            setCheckOutDate,
-            visitorsNumber,
-            setVisitorsNumber,
+            getRooms,
+            basicFilteredRooms,
+            roomsFilteredByCapacity,
+            searchingActive,
           }}
         >
-          <div className='App'>
-            <Navbar isHeaderTransparent={isHeaderTransparent} />
-            <Switch>
-              <Route path='/reservation'>
-                <Reservation />
-              </Route>
-              {/* <Route path='/about'>
+          <ReservationDataContext.Provider
+            value={{
+              checkInDate,
+              checkOutDate,
+              setCheckInDate,
+              setCheckOutDate,
+              visitorsNumber,
+              setVisitorsNumber,
+            }}
+          >
+            <div className='App'>
+              <Navbar isHeaderTransparent={isHeaderTransparent} />
+              <Switch>
+                <Route path='/reservation'>
+                  <Reservation />
+                </Route>
+                {/* <Route path='/about'>
                 <h3>O NAS</h3>
               </Route> */}
-              <Route path='/'>
-                <Home />
-              </Route>
-            </Switch>
-          </div>
-        </ReservationDataContext.Provider>
-      </RoomsDataContext.Provider>
+                <Route path='/'>
+                  <Home />
+                </Route>
+              </Switch>
+            </div>
+          </ReservationDataContext.Provider>
+        </RoomsDataContext.Provider>
       </ShowDatepickerContext.Provider>
     </Router>
   );

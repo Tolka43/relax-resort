@@ -5,9 +5,13 @@ import { RoomsDataContext } from '../App';
 import './SearchEngine/SearchEngine.scss';
 import SearchEngine from './SearchEngine/SearchEngine';
 
-const ReservationSystem = ({ setReservationFormActive }: any) => {
+interface ReservationSystemProps {
+  setReservationFormActive: (value: boolean) => void;
+}
+
+const ReservationSystem = ({ setReservationFormActive }: ReservationSystemProps) => {
   const {
-    basicFilteredRoom,
+    basicFilteredRooms,
     roomsFilteredByCapacity,
     searchingActive,
   } = useContext(RoomsDataContext);
@@ -18,10 +22,10 @@ const ReservationSystem = ({ setReservationFormActive }: any) => {
         <SearchEngine />
 
         <div>
-          {basicFilteredRoom.length > 0 ? (
+          {basicFilteredRooms.length > 0 ? (
             <div className='center'>
               <div className='cards-div'>
-                {basicFilteredRoom.map((room: any) => (
+                {basicFilteredRooms.map((room) => (
                   <RoomCard
                     key={room.id}
                     room={room}
@@ -41,7 +45,7 @@ const ReservationSystem = ({ setReservationFormActive }: any) => {
                 </p>
                 <div className='center'>
                   <div className='cards-div'>
-                    {roomsFilteredByCapacity.map((room: any) => (
+                    {roomsFilteredByCapacity.map((room) => (
                       <RoomCard
                         key={room.id}
                         room={room}

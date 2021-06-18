@@ -1,17 +1,20 @@
 import useRoomsData from '../hooks/useRoomsData';
 import OfferCard from './RoomCard/RoomCard';
 
-const SearchResults = ({ setReservationFormActive }: any) => {
+interface SearchResultsProps {
+  setReservationFormActive: (value: boolean) => void;
+}
+
+const SearchResults = ({ setReservationFormActive }: SearchResultsProps) => {
   const {
-    getRooms,
-    basicFilteredRoom,
+    basicFilteredRooms,
     roomsFilteredByCapacity,
     searchingActive,
-  }: any = useRoomsData();
+  } = useRoomsData();
   return (
     <div>
-      {basicFilteredRoom.length > 0
-        ? basicFilteredRoom.map((room: any) => (
+      {basicFilteredRooms.length > 0
+        ? basicFilteredRooms.map((room) => (
             <OfferCard
               key={room.id}
               room={room}
@@ -26,7 +29,7 @@ const SearchResults = ({ setReservationFormActive }: any) => {
                 zobacz oferty pasujące do twoich wyszukiwań dostępne w innych
                 terminach
               </p>
-              {roomsFilteredByCapacity.map((room: any) => (
+              {roomsFilteredByCapacity.map((room) => (
                 <OfferCard
                   key={room.id}
                   room={room}
