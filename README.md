@@ -1,7 +1,6 @@
 # Relax Resort
 App that will allow you to book a room for your holiday.
 
-check it out here: https://relax-resort.herokuapp.com/
 
 landing page             |  reservation system
 :-------------------------:|:-------------------------:
